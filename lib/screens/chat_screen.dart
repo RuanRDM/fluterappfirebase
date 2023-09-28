@@ -16,20 +16,58 @@ class ChatScreen extends StatefulWidget{
 class ChatScreenState extends State<ChatScreen>{
   bool _isLoading = false;
 
+  final CollectionReference _mensagens =
+  FirebaseFirestore.instance.collection("mensagens");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Chat App"),
       ),
-      body: TextComposer(_sendMessage),
+      body:
+      Column(
+        children: <Widget>[
+          Expanded(child: StreamBuilder<QuerySnapshot>(
+            stream: _mensagens.orderBy("time").snapshots(),
+            builder: (context,snapshot){
+              switch(snapshot.connectionState){
+                case ConnectionState.waiting:
+                  return Center(child: CircularProgressIndicator());
+                default :
+                  List<DocumentSnapshot> documents =
+                      snapshot.data!.docs.reversed.toList();
+                  return ListView.builder(
+                      itemCount: documents.length,
+                      reverse: true,
+                      itemBuilder: (context,index){
+                        return Container(
+                          margin: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 10
+                          ),
+                          child: Row(
+                            children: <Widget>[
+                              Expanded(child: Column(
+                                children: <Widget>[
+                                  documents[index].get('url') != ""
+                                  ? Image.network(documents[index].get('url'), width: 150)
+                                      : Text(documents[index].get('text'), style: TextStyle(fontSize: 16),)
+                                ],
+                              ))
+                            ],
+                          ),
+                        );
+                      });
+              }
+            },
+          )),
+          TextComposer(_sendMessage),
+        ],
+      )
     );
   }
 
   void _sendMessage({String? text, XFile? imgFile}) async{
-    final CollectionReference _mensagens =
-        FirebaseFirestore.instance.collection("mensagens");
-
     Map<String, dynamic> data = {
       'url': "",
       'time': Timestamp.now(),
