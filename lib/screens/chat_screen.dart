@@ -82,7 +82,7 @@ class ChatScreenState extends State<ChatScreen> {
 
   void _sendMessage({String? text, XFile? imgFile}) async {
     //User? user = await _getUser(context: context);
-    User? user = await _getUserGit(context: context);
+    //User? user = await _getUserGit(context: context);
 
     Map<String, dynamic> data = {
       'url': "",

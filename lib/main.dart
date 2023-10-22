@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fluterappfirebase/screens/chat_screen.dart';
+import 'package:fluterappfirebase/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,7 +40,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: ChatScreen(),
+      //home: ChatScreen(),
+      home: HomeScreen(),
+      routes: {
+        '/chat': (context) => ChatScreen(), // Rota para a tela de chat
+      },
     );
   }
 }
