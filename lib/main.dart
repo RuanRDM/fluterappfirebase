@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fluterappfirebase/screens/chat_screen.dart';
 import 'package:fluterappfirebase/screens/home_screen.dart';
+import 'package:fluterappfirebase/screens/mapa_screen.dart';
+import 'package:fluterappfirebase/screens/lista_screen.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
 
@@ -43,7 +45,9 @@ class MyApp extends StatelessWidget {
       //home: ChatScreen(),
       home: HomeScreen(),
       routes: {
-        '/chat': (context) => ChatScreen(), // Rota para a tela de chat
+        '/chat': (context) => ChatScreen(),
+        '/map': (context) => MapSample(),
+        '/lista': (context) => Lista(),// Rota para a tela de chat
       },
     );
   }

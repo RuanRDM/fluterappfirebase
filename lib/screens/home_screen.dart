@@ -29,6 +29,7 @@ class HomeScreen extends StatelessWidget {
       try {
         final UserCredential userCredential = await FirebaseAuth.instance.signInWithProvider(githubProvider);
         user = userCredential.user;
+
       } catch (e) {
         print(e);
       }
@@ -107,6 +108,30 @@ class HomeScreen extends StatelessWidget {
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.white), // Fundo branco
                 foregroundColor: MaterialStateProperty.all(Colors.black), // Texto preto
+              ),
+            ),
+            SizedBox(height: 16), // Espaçamento entre os botões
+            ElevatedButton.icon(
+              onPressed: () async {
+                Navigator.of(context).pushNamed('/lista');
+              },
+              icon: Image.asset("assets/marcador_icon.png", height: 24), // Ícone do GitHub
+              label: Text("Adicionar Locais"),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.red), // Fundo branco
+                foregroundColor: MaterialStateProperty.all(Colors.white), // Texto preto
+              ),
+            ),
+            SizedBox(height: 16), // Espaçamento entre os botões
+            ElevatedButton.icon(
+              onPressed: () async {
+                Navigator.of(context).pushNamed('/map');
+              },
+              icon: Image.asset("assets/maps_icon.png", height: 24), // Ícone do GitHub
+              label: Text("Google Maps"),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.green), // Fundo branco
+                foregroundColor: MaterialStateProperty.all(Colors.white), // Texto preto
               ),
             ),
           ],
