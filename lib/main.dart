@@ -4,6 +4,9 @@ import 'package:fluterappfirebase/screens/chat_screen.dart';
 import 'package:fluterappfirebase/screens/home_screen.dart';
 import 'package:fluterappfirebase/screens/mapa_screen.dart';
 import 'package:fluterappfirebase/screens/lista_screen.dart';
+import 'package:fluterappfirebase/screens/login_screen.dart';
+import 'package:fluterappfirebase/screens/text_recognition_screen.dart';
+import 'package:fluterappfirebase/screens/image_labeling_screen.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
 
@@ -43,11 +46,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       //home: ChatScreen(),
-      home: HomeScreen(),
+      home: LoginScreen(),
       routes: {
         '/chat': (context) => ChatScreen(),
         '/map': (context) => MapSample(),
-        '/lista': (context) => Lista(),// Rota para a tela de chat
+        '/lista': (context) => Lista(),
+        '/home': (context) => HomeScreen(),
+        '/textRecognition': (context) => TextRecognitionScreen(),
+        '/imageLabeling': (context) =>ImageLabelingScreen(),// Rota para a tela de chat
       },
     );
   }

@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -175,4 +176,20 @@ class ChatScreenState extends State<ChatScreen> {
     return user;
   }
 
+  @override
+  void initState() {
+    super.initState();
+    setupPushNotifications();
+  }
+
+  void setupPushNotifications() async{
+    final CollectionReference _token =
+    FirebaseFirestore.instance.collection("token");
+    final fcm = FirebaseMessaging.instance;
+    await fcm.requestPermission();
+    final token = await fcm.getToken();
+    print("Token:");
+    print(token);
+    _token.add({"token": token});
+  }
 }
