@@ -98,6 +98,22 @@ class HomeScreen extends StatelessWidget {
                 fixedSize: MaterialStateProperty.all(Size(300, 50)),
               ),
             ),
+            SizedBox(height: 16), // Espaçamento entre os botões
+            ElevatedButton.icon(
+              onPressed: () async {
+                Navigator.of(context).pushNamed('/listaTextos');
+              },
+              icon: Image.asset("assets/text_icon.png", height: 32),
+              label: Text(
+                "Lista Textos",
+                style: TextStyle(fontSize: 25), // Ajuste o tamanho do texto conforme necessário
+              ),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.deepPurpleAccent),
+                foregroundColor: MaterialStateProperty.all(Colors.white),
+                fixedSize: MaterialStateProperty.all(Size(300, 50)),
+              ),
+            ),
           ],
         ),
       ),

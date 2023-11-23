@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ImageLabelingScreen extends StatefulWidget {
   const ImageLabelingScreen({Key? key}) : super(key: key);
@@ -87,6 +89,12 @@ class _ImageLabelingScreenState extends State<ImageLabelingScreen> {
     ImageLabeler(options: ImageLabelerOptions(confidenceThreshold: 0.75));
     List<ImageLabel> labels = await imageLabeler.processImage(inputImage);
     StringBuffer sb = StringBuffer();
+
+    Map<String, dynamic> data = {
+      'url': "",
+      'time': Timestamp.now(),
+    };
+    String dadosimg = "";
     for (ImageLabel imgLabel in labels) {
       String lblText = imgLabel.label;
       double confidence = imgLabel.confidence;
@@ -94,12 +102,29 @@ class _ImageLabelingScreenState extends State<ImageLabelingScreen> {
       sb.write(" : ");
       sb.write((confidence * 100).toStringAsFixed(2));
       sb.write("%\n");
+      dadosimg += "$lblText : ${(confidence * 100).toStringAsFixed(2)}%\n";
     }
+    firebase_storage.UploadTask uploadTask;
+    firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child("imgs-labeling")
+        .child(DateTime.now().millisecondsSinceEpoch.toString());
+
+    firebase_storage.SettableMetadata metadata = firebase_storage.SettableMetadata(
+      contentType: "image/jpeg",
+      customMetadata: {"picked-file-path": image.path, "Informações Recognition": dadosimg},
+    );
+
+    uploadTask = ref.putFile(File(image.path), metadata);
+
     imageLabeler.close();
     result = sb.toString();
     isScanning = false;
     setState(() {});
   }
+
+
+
 
   showImageSourceDialog(BuildContext context) {
     showModalBottomSheet(

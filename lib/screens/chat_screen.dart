@@ -114,68 +114,6 @@ class ChatScreenState extends State<ChatScreen> {
     _mensagens.add(data);
   }
 
-  Future<User?> _getUserGit({required BuildContext context}) async {
-    User? user;
-    if (_currentUser != null) return _currentUser;
-
-    if (kIsWeb) {
-      //WEB
-      GithubAuthProvider githubProvider = GithubAuthProvider();
-      try {
-        final UserCredential userCredential = await FirebaseAuth.instance.signInWithPopup(githubProvider);
-        user = userCredential.user;
-      } catch (e) {
-        print(e);
-      }
-    } else {
-      //ANDROID
-      GithubAuthProvider githubProvider = GithubAuthProvider();
-      try {
-        final UserCredential userCredential = await FirebaseAuth.instance.signInWithProvider(githubProvider);
-        user = userCredential.user;
-      } catch (e) {
-        print(e);
-      }
-    }
-    print("User logado:"+user!.email.toString());
-    return user;
-  }
-
-  Future<User?> _getUser({required BuildContext context}) async {
-    User? user;
-    if (_currentUser != null) return _currentUser;
-    if (kIsWeb) {
-      //WEB
-      GoogleAuthProvider authProvider = GoogleAuthProvider();
-      try {
-        final UserCredential userCredential =
-        await auth.signInWithPopup(authProvider);
-        user = userCredential.user;
-      } catch (e) {
-        print(e);
-      }
-    } else {
-      //ANDROID
-      final GoogleSignInAccount? googleSignInAccount =
-      await googleSignIn.signIn();
-      if (googleSignInAccount != null) {
-        final GoogleSignInAuthentication googleSignInAuthentication =
-        await googleSignInAccount.authentication;
-
-        final AuthCredential credential = GoogleAuthProvider.credential(
-            accessToken: googleSignInAuthentication.accessToken,
-            idToken: googleSignInAuthentication.idToken);
-        try {
-          final UserCredential userCredential =
-          await auth.signInWithCredential(credential);
-          user = userCredential.user;
-        } catch (e) { print(e); }
-      }
-    }
-    print("user logado: " + user!.displayName.toString());
-    return user;
-  }
-
   @override
   void initState() {
     super.initState();

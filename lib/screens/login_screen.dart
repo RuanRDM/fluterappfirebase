@@ -101,7 +101,7 @@ class LoginScreen extends StatelessWidget {
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.blue), // Fundo branco
                 foregroundColor: MaterialStateProperty.all(Colors.white),
-                fixedSize: MaterialStateProperty.all(Size(300, 50)),// Texto preto
+                fixedSize: MaterialStateProperty.all(Size(350, 50)),// Texto preto
               ),
             ),
             SizedBox(height: 16), // Espaçamento entre os botões
@@ -121,7 +121,7 @@ class LoginScreen extends StatelessWidget {
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.white), // Fundo branco
                 foregroundColor: MaterialStateProperty.all(Colors.black),
-                fixedSize: MaterialStateProperty.all(Size(300, 50)),// Texto preto
+                fixedSize: MaterialStateProperty.all(Size(350, 50)),// Texto preto
               ),
             ),
             SizedBox(height: 16), // Espaçamento entre os botões
@@ -140,7 +140,7 @@ class LoginScreen extends StatelessWidget {
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.redAccent), // Fundo branco
                 foregroundColor: MaterialStateProperty.all(Colors.black),
-                fixedSize: MaterialStateProperty.all(Size(300, 50)),// Texto preto
+                fixedSize: MaterialStateProperty.all(Size(350, 50)),// Texto preto
               ),
             ),
           ],

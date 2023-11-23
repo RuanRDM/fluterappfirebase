@@ -4,6 +4,7 @@ import 'package:fluterappfirebase/screens/chat_screen.dart';
 import 'package:fluterappfirebase/screens/home_screen.dart';
 import 'package:fluterappfirebase/screens/mapa_screen.dart';
 import 'package:fluterappfirebase/screens/lista_screen.dart';
+import 'package:fluterappfirebase/screens/list_recognition_screen.dart';
 import 'package:fluterappfirebase/screens/login_screen.dart';
 import 'package:fluterappfirebase/screens/text_recognition_screen.dart';
 import 'package:fluterappfirebase/screens/image_labeling_screen.dart';
@@ -53,7 +54,8 @@ class MyApp extends StatelessWidget {
         '/lista': (context) => Lista(),
         '/home': (context) => HomeScreen(),
         '/textRecognition': (context) => TextRecognitionScreen(),
-        '/imageLabeling': (context) =>ImageLabelingScreen(),// Rota para a tela de chat
+        '/imageLabeling': (context) =>ImageLabelingScreen(),
+        '/listaTextos': (context) => ListaTextos(),// Rota para a tela de chat
       },
     );
   }
